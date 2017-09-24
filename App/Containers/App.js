@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
+import ActionExtensionScreen from './ActionExtensionScreen'
 
 // create our store
 const store = createStore()
@@ -18,10 +19,22 @@ const store = createStore()
  * We separate like this to play nice with React Native's hot reloading.
  */
 class App extends Component {
+  // static propTypes = {
+  //   isActionExtension: React.PropTypes.bool,
+  //   key2: React.PropTypes.object,
+  // }
+
+  // static defaultProps = {
+  //   isActionExtension: false,
+  //   key2: {msg: 'not extension'}
+  // }
+
   render () {
+    const component = this.props.isActionExtension ? <ActionExtensionScreen key2={this.props.key2} /> : <RootContainer />
+    console.log('this.props', this.props)
     return (
       <Provider store={store}>
-        <RootContainer />
+        { component }
       </Provider>
     )
   }
